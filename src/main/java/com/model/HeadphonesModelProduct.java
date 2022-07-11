@@ -5,11 +5,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Phone extends Product {
+public class HeadphonesModelProduct extends Product{
+
     private final String model;
     private final Manufacturer manufacturer;
 
-    public Phone(String title, int count, double price, String model, Manufacturer manufacturer) {
+    public HeadphonesModelProduct(String title, int count, double price, String model, Manufacturer manufacturer) {
         super(title, count, price);
         this.model = model;
         this.manufacturer = manufacturer;
@@ -17,7 +18,7 @@ public class Phone extends Product {
 
     @Override
     public String toString() {
-        return "Phone{" +
+        return "Headphones{" +
                 "manufacturer=" + manufacturer +
                 ", id='" + id + '\'' +
                 ", title='" + title + '\'' +

@@ -1,21 +1,21 @@
 package com.service;
 
 import com.model.Manufacturer;
-import com.model.PhoneModelProduct;
-import com.repository.PhoneRepository;
+import com.model.HeadphonesModelProduct;
+import com.repository.HeadphonesRepository;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class PhoneService {
+public class HeadphonesService {
     private static final Random RANDOM = new Random();
-    private static final PhoneRepository REPOSITORY = new PhoneRepository();
+    private static final HeadphonesRepository REPOSITORY = new HeadphonesRepository();
 
     public void createAndSavePhones(int count) {
-        List<PhoneModelProduct> phones = new LinkedList<>();
+        List<HeadphonesModelProduct> headphones = new LinkedList<>();
         for (int i = 0; i < count; i++) {
-            phones.add(new PhoneModelProduct(
+            headphones.add(new HeadphonesModelProduct(
                     "Title-" + RANDOM.nextInt(1000),
                     RANDOM.nextInt(500),
                     RANDOM.nextDouble(),
@@ -23,7 +23,7 @@ public class PhoneService {
                     getRandomManufacturer()
             ));
         }
-        REPOSITORY.saveAll(phones);
+        REPOSITORY.saveAll(headphones);
     }
 
     private Manufacturer getRandomManufacturer() {
@@ -33,8 +33,8 @@ public class PhoneService {
     }
 
     public void printAll() {
-        for (PhoneModelProduct phone : REPOSITORY.getAll()) {
-            System.out.println(phone);
+        for (HeadphonesModelProduct headphones : REPOSITORY.getAll()) {
+            System.out.println(headphones);
         }
     }
 }

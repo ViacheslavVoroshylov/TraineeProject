@@ -1,0 +1,81 @@
+package com.repository;
+
+import com.model.HeadphonesModelProduct;
+
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+
+public class HeadphonesRepository implements CrudHeadphonesRepository{
+
+    private final List<HeadphonesModelProduct> headphones;
+
+    public HeadphonesRepository() {
+        headphones = new LinkedList<>();
+    }
+
+    @Override
+    public void save(HeadphonesModelProduct headphone) {
+        headphones.add(headphone);
+    }
+
+    @Override
+    public void saveAll(List<HeadphonesModelProduct> headphones) {
+        for (HeadphonesModelProduct headphone : headphones) {
+            save(headphone);
+        }
+    }
+
+    @Override
+    public boolean update(HeadphonesModelProduct headphone) {
+        final Optional<HeadphonesModelProduct> result = findById(headphone.getId());
+        if (result.isEmpty()) {
+            return false;
+        }
+        final HeadphonesModelProduct originHeadphones = result.get();
+        HeadphonesCopy.copy(headphone, originHeadphones);
+        return true;
+    }
+
+    @Override
+    public boolean delete(String id) {
+        final Iterator<HeadphonesModelProduct> iterator = headphones.iterator();
+        while (iterator.hasNext()) {
+            final HeadphonesModelProduct headphone = iterator.next();
+            if (headphone.getId().equals(id)) {
+                iterator.remove();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public List<HeadphonesModelProduct> getAll() {
+        if (headphones.isEmpty()) {
+            return Collections.emptyList();
+        }
+        return headphones;
+    }
+
+    @Override
+    public Optional<HeadphonesModelProduct> findById(String id) {
+        HeadphonesModelProduct result = null;
+        for (HeadphonesModelProduct headphone : headphones) {
+            if (headphone.getId().equals(id)) {
+                result = headphone;
+            }
+        }
+        return Optional.ofNullable(result);
+    }
+
+    private static class HeadphonesCopy {
+        private static void copy(final HeadphonesModelProduct from, final HeadphonesModelProduct to) {
+            to.setCount(from.getCount());
+            to.setPrice(from.getPrice());
+            to.setTitle(from.getTitle());
+        }
+    }
+}

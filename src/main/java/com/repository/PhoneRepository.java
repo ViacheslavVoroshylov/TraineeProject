@@ -8,7 +8,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.log4j.Logger;
+
 public class PhoneRepository implements CrudPhoneRepository {
+
+    private static final Logger LOGGER = Logger.getLogger(PhoneRepository.class);
 
     private final List<PhoneModelProduct> phones;
 
@@ -32,10 +36,12 @@ public class PhoneRepository implements CrudPhoneRepository {
     public boolean update(PhoneModelProduct phone) {
         final Optional<PhoneModelProduct> result = findById(phone.getId());
         if (result.isEmpty()) {
+            LOGGER.info("Element is not found");
             return false;
         }
         final PhoneModelProduct originPhone = result.get();
         PhoneCopy.copy(phone, originPhone);
+        LOGGER.info("Element is update");
         return true;
     }
 
@@ -46,6 +52,7 @@ public class PhoneRepository implements CrudPhoneRepository {
             final PhoneModelProduct phone = iterator.next();
             if (phone.getId().equals(id)) {
                 iterator.remove();
+                LOGGER.info("Delete item " + id + " was successful");
                 return true;
             }
         }

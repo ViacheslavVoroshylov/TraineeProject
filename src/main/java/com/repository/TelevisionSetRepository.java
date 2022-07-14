@@ -1,6 +1,7 @@
 package com.repository;
 
 import com.model.TelevisionSetModelProduct;
+import org.apache.log4j.Logger;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -9,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class TelevisionSetRepository implements CrudTelevisionSetRepository {
+
+    private static final Logger LOGGER = Logger.getLogger(TelevisionSetRepository.class);
 
     private final List<TelevisionSetModelProduct> televisionsSet;
 
@@ -32,10 +35,12 @@ public class TelevisionSetRepository implements CrudTelevisionSetRepository {
     public boolean update(TelevisionSetModelProduct televisionSet) {
         final Optional<TelevisionSetModelProduct> result = findById(televisionSet.getId());
         if(result.isEmpty()) {
+            LOGGER.info("Element is not found");
             return false;
         }
         final TelevisionSetModelProduct originTelevisionSet = result.get();
         TelevisionSetCopy.copy(televisionSet, originTelevisionSet);
+        LOGGER.info("Element is update");
         return true;
     }
 
@@ -46,6 +51,7 @@ public class TelevisionSetRepository implements CrudTelevisionSetRepository {
             final TelevisionSetModelProduct televisionSet = iterator.next();
             if (televisionSet.getId().equals(id)){
                 iterator.remove();
+                LOGGER.info("Delete item " + id + " was successful");
                 return true;
             }
         }

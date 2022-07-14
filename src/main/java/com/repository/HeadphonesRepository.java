@@ -1,6 +1,7 @@
 package com.repository;
 
 import com.model.HeadphonesModelProduct;
+import org.apache.log4j.Logger;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 public class HeadphonesRepository implements CrudHeadphonesRepository{
 
+    private static final Logger LOGGER = Logger.getLogger(HeadphonesRepository.class);
     private final List<HeadphonesModelProduct> headphones;
 
     public HeadphonesRepository() {
@@ -32,10 +34,12 @@ public class HeadphonesRepository implements CrudHeadphonesRepository{
     public boolean update(HeadphonesModelProduct headphone) {
         final Optional<HeadphonesModelProduct> result = findById(headphone.getId());
         if (result.isEmpty()) {
+            LOGGER.info("Element is not found");
             return false;
         }
         final HeadphonesModelProduct originHeadphones = result.get();
         HeadphonesCopy.copy(headphone, originHeadphones);
+        LOGGER.info("Element is update");
         return true;
     }
 
@@ -46,6 +50,7 @@ public class HeadphonesRepository implements CrudHeadphonesRepository{
             final HeadphonesModelProduct headphone = iterator.next();
             if (headphone.getId().equals(id)) {
                 iterator.remove();
+                LOGGER.info("Delete item " + id + " was successful");
                 return true;
             }
         }

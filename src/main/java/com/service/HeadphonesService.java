@@ -2,23 +2,22 @@ package com.service;
 
 import com.model.Manufacturer;
 import com.model.HeadphonesModelProduct;
-import com.model.PhoneModelProduct;
 import com.repository.HeadphonesRepository;
-import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
+
 public class HeadphonesService {
 
+    private List<HeadphonesModelProduct> headphonesList;
+    private static final Random RANDOM = new Random();
+    private static final HeadphonesRepository REPOSITORY = new HeadphonesRepository();
     private static final Logger LOGGER = Logger.getLogger(HeadphonesService.class);
 
-    private static final Random RANDOM = new Random();
-
-    private static final HeadphonesRepository REPOSITORY = new HeadphonesRepository();
-
-    public List<HeadphonesModelProduct> createAndSaveHeadphones(int count) {
+    public void createAndSaveHeadphones(int count) {
         List<HeadphonesModelProduct> headphones = new LinkedList<>();
         for (int i = 0; i < count; i++) {
             headphones.add(new HeadphonesModelProduct(
@@ -29,17 +28,18 @@ public class HeadphonesService {
                     getRandomManufacturer()
             ));
         }
+
         REPOSITORY.saveAll(headphones);
-        return headphones;
+        headphonesList = headphones;
     }
 
-    public String createSaveAndGetIdHeadphones(int count, int numberListElement){
-        return createAndSaveHeadphones(count).get(numberListElement).getId();
+    public String getIdHeadphonesByNumberList(int numberListElement){
+        return headphonesList.get(numberListElement).getId();
     }
 
-    public void createSaveAndSetCountHeadphones(int countElementsList, int numberListElement, int countHeadphones){
-        createAndSaveHeadphones(countElementsList).get(numberListElement).setCount(countHeadphones);
-        LOGGER.info("Headphones count change");
+    public void changeCountHeadphonesByNumberListElement(int numberListElement, int countHeadphones){
+        headphonesList.get(numberListElement).setCount(countHeadphones);
+        LOGGER.info("Number element " + numberListElement + " on the list headphones count change to " + countHeadphones);
     }
 
     public boolean removeHeadphones(String id){

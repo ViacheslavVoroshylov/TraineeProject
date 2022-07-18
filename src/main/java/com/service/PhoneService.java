@@ -1,24 +1,23 @@
 package com.service;
 
-
 import com.model.Manufacturer;
 import com.model.PhoneModelProduct;
 import com.repository.PhoneRepository;
-import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
 
 public class PhoneService {
 
-    private static final Logger LOGGER = Logger.getLogger(PhoneService.class);
-
+    private List<PhoneModelProduct> phonesList;
     private static final Random RANDOM = new Random();
     private static final PhoneRepository REPOSITORY = new PhoneRepository();
+    private static final Logger LOGGER = Logger.getLogger(PhoneService.class);
 
-    public List<PhoneModelProduct> createAndSavePhones(int count) {
+    public void createAndSavePhones(int count) {
         List<PhoneModelProduct> phones = new LinkedList<>();
         for (int i = 0; i < count; i++) {
             phones.add(new PhoneModelProduct(
@@ -29,17 +28,18 @@ public class PhoneService {
                     getRandomManufacturer()
             ));
         }
+
         REPOSITORY.saveAll(phones);
-        return phones;
+        phonesList = phones;
     }
 
-    public String createSaveAndGetIdPhones(int count, int numberListElement){
-        return createAndSavePhones(count).get(numberListElement).getId();
-    }
+    public String getIdPhonesByNumberList(int numberListElement){
+        return phonesList.get(numberListElement).getId();
+   }
 
-    public void createSaveAndSetCountPhones(int countElementsList, int numberListElement, int countPhones){
-        createAndSavePhones(countElementsList).get(numberListElement).setCount(countPhones);
-        LOGGER.info("Phone count change");
+    public void changeCountPhonesByNumberListElement(int numberListElement, int countPhones){
+        phonesList.get(numberListElement).setCount(countPhones);
+        LOGGER.info("Number element " + numberListElement + " on the list phone count change to " + countPhones);
     }
 
     public boolean removePhones(String id){

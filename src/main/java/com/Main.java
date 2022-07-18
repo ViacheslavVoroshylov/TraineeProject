@@ -1,12 +1,8 @@
 package com;
 
-import com.repository.PhoneRepository;
 import com.service.HeadphonesService;
 import com.service.PhoneService;
 import com.service.TelevisionSetService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 
@@ -19,9 +15,12 @@ public class Main {
     public static void main(String[] args) {
 
 
-        PHONE_SERVICE.removePhones(PHONE_SERVICE.createSaveAndGetIdPhones(2,1));
+        PHONE_SERVICE.createAndSavePhones(3);
         PHONE_SERVICE.printAll();
-        PHONE_SERVICE.createSaveAndSetCountPhones(2,1,2);
+        PHONE_SERVICE.removePhones(PHONE_SERVICE.getIdPhonesByNumberList(1));
+        PHONE_SERVICE.printAll();
+
+        PHONE_SERVICE.changeCountPhonesByNumberListElement(0,2);
         PHONE_SERVICE.printAll();
 
         HEADPHONES_SERVICE.createAndSaveHeadphones(2);

@@ -1,24 +1,23 @@
 package com.service;
 
 import com.model.Manufacturer;
-import com.model.PhoneModelProduct;
 import com.model.TelevisionSetModelProduct;
 import com.repository.TelevisionSetRepository;
-import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.log4j.Logger;
+
 public class TelevisionSetService {
 
+    private List<TelevisionSetModelProduct> televisionSetList;
+    private static final Random RANDOM = new Random();
+    private static final TelevisionSetRepository REPOSITORY = new TelevisionSetRepository();
     private static final Logger LOGGER = Logger.getLogger(TelevisionSetService.class);
 
-    private static final Random RANDOM = new Random();
-
-    private static final TelevisionSetRepository REPOSITORY = new TelevisionSetRepository();
-
-    public List<TelevisionSetModelProduct> createAndSaveTelevisionSet(int count) {
+    public void createAndSaveTelevisionSet(int count) {
         List<TelevisionSetModelProduct> televisionSet = new LinkedList<>();
         for (int i = 0; i < count; i++) {
             televisionSet.add(new TelevisionSetModelProduct(
@@ -29,22 +28,23 @@ public class TelevisionSetService {
                     getRandomManufacturer()
             ));
         }
+
         REPOSITORY.saveAll(televisionSet);
-        return televisionSet;
+        televisionSetList = televisionSet;
     }
 
-    public String createSaveAndGetIdTelevisionSet(int count, int numberListElement){
-        return createAndSaveTelevisionSet(count).get(numberListElement).getId();
-    }
-
-    public void createSaveAndSetCountTelevisionSet(int countElementsList, int numberListElement, int countTelevisionSet){
-        createAndSaveTelevisionSet(countElementsList).get(numberListElement).setCount(countTelevisionSet);
-        LOGGER.info("Television Set count change");
+    public String createSaveAndGetIdTelevisionSet(int numberListElement){
+        return televisionSetList.get(numberListElement).getId();
     }
 
     public boolean removeTelevisionSet(String id){
         REPOSITORY.delete(id);
         return true;
+    }
+
+    public void changeCountTelevisionSetByNumberListElement(int numberListElement, int countTelevisionSet){
+        televisionSetList.get(numberListElement).setCount(countTelevisionSet);
+        LOGGER.info("Number element " + numberListElement + " on the list television set count change to " + countTelevisionSet);
     }
 
     private Manufacturer getRandomManufacturer() {

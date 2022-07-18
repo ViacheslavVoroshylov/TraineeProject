@@ -8,12 +8,10 @@ import lombok.Setter;
 public class HeadphonesModelProduct extends Product{
 
     private final String model;
-    private final Manufacturer manufacturer;
 
     public HeadphonesModelProduct(String title, int count, double price, String model, Manufacturer manufacturer) {
-        super(title, count, price);
+        super(title, count, price, manufacturer);
         this.model = model;
-        this.manufacturer = manufacturer;
     }
 
     @Override

@@ -1,8 +1,11 @@
 package com.service.impl;
 
+import com.factory.AbstractRepositoryFactory;
 import com.model.Manufacturer;
 import com.model.TelevisionSetModelProduct;
+import com.repository.PhoneRepository;
 import com.repository.TelevisionSetRepository;
+import com.repository.impl.PhoneRepositoryImpl;
 import com.repository.impl.TelevisionSetRepositoryImpl;
 import com.service.TelevisionSetService;
 import org.apache.log4j.Logger;
@@ -15,7 +18,7 @@ public class TelevisionSetServiceImpl implements TelevisionSetService {
 
     private List<TelevisionSetModelProduct> televisionSetList;
     private static final Random RANDOM = new Random();
-    private static final TelevisionSetRepository TELEVISION_SET_REPOSITORY = new TelevisionSetRepositoryImpl();
+    private static final TelevisionSetRepository TELEVISION_SET_REPOSITORY = AbstractRepositoryFactory.getTelevisionSetRepository();
     private static final Logger LOGGER = Logger.getLogger(TelevisionSetServiceImpl.class);
 
     @Override

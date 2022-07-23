@@ -1,19 +1,15 @@
 package com;
 
+import com.factory.AbstractServiceFactory;
 import com.service.HeadphonesService;
 import com.service.PhoneService;
 import com.service.TelevisionSetService;
-import com.service.impl.HeadphonesServiceImpl;
-import com.service.impl.PhoneServiceImpl;
-import com.service.impl.TelevisionSetServiceImpl;
 
 public class Main {
 
-    private static final PhoneService PHONE_SERVICE = new PhoneServiceImpl();
-
-    private static final HeadphonesService HEADPHONES_SERVICE = new HeadphonesServiceImpl();
-
-    private static final TelevisionSetService TELEVISION_SET_SERVICE = new TelevisionSetServiceImpl();
+    private static final PhoneService PHONE_SERVICE = AbstractServiceFactory.getPhoneService();
+    private static final HeadphonesService HEADPHONES_SERVICE = AbstractServiceFactory.getHeadphonesService();
+    private static final TelevisionSetService TELEVISION_SET_SERVICE = AbstractServiceFactory.getTelevisionSetService();
 
     public static void main(String[] args) {
 

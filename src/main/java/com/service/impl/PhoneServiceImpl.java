@@ -1,5 +1,6 @@
 package com.service.impl;
 
+import com.factory.AbstractRepositoryFactory;
 import com.model.Manufacturer;
 import com.model.PhoneModelProduct;
 import com.repository.PhoneRepository;
@@ -16,7 +17,7 @@ public class PhoneServiceImpl implements PhoneService {
 
     private List<PhoneModelProduct> phonesList;
     private static final Random RANDOM = new Random();
-    private static final PhoneRepository PHONE_REPOSITORY = new PhoneRepositoryImpl();
+    private static final PhoneRepository PHONE_REPOSITORY = AbstractRepositoryFactory.getPhoneRepository();
     private static final Logger LOGGER = Logger.getLogger(PhoneServiceImpl.class);
 
     @Override

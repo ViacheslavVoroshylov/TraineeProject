@@ -1,5 +1,6 @@
 package com.service.impl;
 
+import com.factory.AbstractRepositoryFactory;
 import com.model.HeadphonesModelProduct;
 import com.model.Manufacturer;
 import com.repository.HeadphonesRepository;
@@ -15,7 +16,7 @@ public class HeadphonesServiceImpl implements HeadphonesService {
 
     private List<HeadphonesModelProduct> headphonesList;
     private static final Random RANDOM = new Random();
-    private static final HeadphonesRepository HEADPHONES_REPOSITORY = new HeadphonesRepositoryImpl();
+    private static final HeadphonesRepository HEADPHONES_REPOSITORY = AbstractRepositoryFactory.getHeadphonesRepository();
     private static final Logger LOGGER = Logger.getLogger(HeadphonesServiceImpl.class);
 
     @Override

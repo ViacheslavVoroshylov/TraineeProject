@@ -1,16 +1,19 @@
 package com;
 
+import com.service.HeadphonesService;
+import com.service.PhoneService;
+import com.service.TelevisionSetService;
 import com.service.impl.HeadphonesServiceImpl;
 import com.service.impl.PhoneServiceImpl;
 import com.service.impl.TelevisionSetServiceImpl;
 
 public class Main {
 
-    private static final PhoneServiceImpl PHONE_SERVICE = new PhoneServiceImpl();
+    private static final PhoneService PHONE_SERVICE = new PhoneServiceImpl();
 
-    private static final HeadphonesServiceImpl HEADPHONES_SERVICE = new HeadphonesServiceImpl();
+    private static final HeadphonesService HEADPHONES_SERVICE = new HeadphonesServiceImpl();
 
-    private static final TelevisionSetServiceImpl TELEVISION_SET_SERVICE = new TelevisionSetServiceImpl();
+    private static final TelevisionSetService TELEVISION_SET_SERVICE = new TelevisionSetServiceImpl();
 
     public static void main(String[] args) {
 

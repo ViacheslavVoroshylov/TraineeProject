@@ -2,6 +2,9 @@ package com.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
 
 @Getter
 @Setter
@@ -14,14 +17,20 @@ public class HeadphonesModelProduct extends Product{
         this.model = model;
     }
 
+
+
     @Override
     public String toString() {
-        return "Headphones{" +
-                "manufacturer=" + manufacturer +
-                ", id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", count=" + count +
-                ", price=" + price +
-                '}';
+        String[] elements = {
+                "Headphones{" +
+                        "manufacturer=" + manufacturer +
+                        ", id='" + id + '\'' +
+                        ", title='" + title + '\'' +
+                        ", count=" + count +
+                        ", price=" + price +
+                        '}'
+        };
+
+        return StringUtils.join(Arrays.asList(elements), null);
     }
 }

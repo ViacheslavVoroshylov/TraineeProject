@@ -4,7 +4,6 @@ import com.factory.AbstractRepositoryFactory;
 import com.model.Manufacturer;
 import com.model.PhoneModelProduct;
 import com.repository.PhoneRepository;
-import com.repository.impl.PhoneRepositoryImpl;
 import com.service.PhoneService;
 import org.apache.log4j.Logger;
 

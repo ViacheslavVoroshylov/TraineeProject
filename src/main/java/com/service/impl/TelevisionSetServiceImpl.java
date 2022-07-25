@@ -3,10 +3,7 @@ package com.service.impl;
 import com.factory.AbstractRepositoryFactory;
 import com.model.Manufacturer;
 import com.model.TelevisionSetModelProduct;
-import com.repository.PhoneRepository;
 import com.repository.TelevisionSetRepository;
-import com.repository.impl.PhoneRepositoryImpl;
-import com.repository.impl.TelevisionSetRepositoryImpl;
 import com.service.TelevisionSetService;
 import org.apache.log4j.Logger;
 

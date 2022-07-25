@@ -4,7 +4,6 @@ import com.factory.AbstractRepositoryFactory;
 import com.model.HeadphonesModelProduct;
 import com.model.Manufacturer;
 import com.repository.HeadphonesRepository;
-import com.repository.impl.HeadphonesRepositoryImpl;
 import com.service.HeadphonesService;
 import org.apache.log4j.Logger;
 
